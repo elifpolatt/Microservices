@@ -6,3 +6,5 @@
         public int Duration { get; set; }
     }
 }
+
+//deneme 
