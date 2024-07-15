@@ -10,16 +10,17 @@ namespace FreeCourse.Shared.Dtos
     //API'lardan bir istek dönerken ya basarılı ya da basarısız dto nesnesi dönmektedir.
     //basarili ya da basarisiz oldugunda da ortak bir DTO nesnesi dönüldüğünde bu DTO nesnesi içerisinde basarılı ve hata kısmı doldurulur.
     //Tek DTO nesnesi dönecek.
+    //Bu yapıyı errorDto ve successDto olarak iki sekılde de yapabılırdık.
     public class ResponseDto<T>
     {
-        public T Data { get; set; } //API başarılı olduğunda dönecek olan veri
+        public T Data { get; private set; } //API başarılı olduğunda dönecek olan veri
 
         [JsonIgnore] //sadece kendi icinde kullanmak icin 
         //API'e istek yapıldıgında responseında donus tipini verebiliyoruz.
-        public int StatusCode { get; set; } //responseun kodunu belirlemek için
+        public int StatusCode { get; private set; } //responseun kodunu belirlemek için
 
         [JsonIgnore]
-        public bool IsSuccessfull { get; set; } //işlemin başarılı olup olmadığını belirlemek için kullanılır
+        public bool IsSuccessfull { get; private set; } //işlemin başarılı olup olmadığını belirlemek için kullanılır
 
         //bu iki prop ile client karsılasmayacak
 
