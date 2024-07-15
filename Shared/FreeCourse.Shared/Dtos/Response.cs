@@ -11,7 +11,7 @@ namespace FreeCourse.Shared.Dtos
     //basarili ya da basarisiz oldugunda da ortak bir DTO nesnesi dönüldüğünde bu DTO nesnesi içerisinde basarılı ve hata kısmı doldurulur.
     //Tek DTO nesnesi dönecek.
     //Bu yapıyı errorDto ve successDto olarak iki sekılde de yapabılırdık.
-    public class ResponseDto<T>
+    public class Response<T>
     {
         public T Data { get; private set; } //API başarılı olduğunda dönecek olan veri
 
@@ -33,9 +33,9 @@ namespace FreeCourse.Shared.Dtos
         //Static metotlarla beraber yeni bir nesne dönülüyorsa bu Static Factory Method'dur.
 
         //başarılı olması ve kodu
-        public static ResponseDto<T> Success(T data, int statusCode)
+        public static Response<T> Success(T data, int statusCode)
         {
-            return new ResponseDto<T>()
+            return new Response<T>()
             {
                 Data = data,
                 StatusCode = statusCode,
@@ -44,9 +44,9 @@ namespace FreeCourse.Shared.Dtos
         }
          
         //başarıı olabilir ama data almayabilir (update)
-        public static ResponseDto<T> Success(int statusCode)
+        public static Response<T> Success(int statusCode)
         {
-            return new ResponseDto<T>
+            return new Response<T>
             {
                 Data = default(T),
                 StatusCode = statusCode,
@@ -54,9 +54,9 @@ namespace FreeCourse.Shared.Dtos
             };
         }
 
-        public static ResponseDto<T> Fail(List<string> errors, int statusCode)
+        public static Response<T> Fail(List<string> errors, int statusCode)
         {
-            return new ResponseDto<T>
+            return new Response<T>
             {
                 Errors = errors,
                 StatusCode = statusCode,
@@ -64,9 +64,9 @@ namespace FreeCourse.Shared.Dtos
             };
         }
         //tek bir hata dönecek
-        public static ResponseDto<T> Fail(string error, int statusCode)
+        public static Response<T> Fail(string error, int statusCode)
         {
-            return new ResponseDto<T>
+            return new Response<T>
             {
                 Errors = new List<string>() { error },
                 StatusCode = statusCode,
