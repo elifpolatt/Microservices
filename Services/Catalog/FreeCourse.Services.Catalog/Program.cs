@@ -7,9 +7,10 @@ using MongoDB.Driver;
 var builder = WebApplication.CreateBuilder(args);
 
 
-//ICategoryService'le karsýlastýýgnda Category service'den nesne ornegý getir.
+//ICategoryService'le karsýlastýýgnda Categoryservice'den nesne ornegý getir.
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+//ICourseService'le karsýlastýýgnda Courseservice'den nesne ornegý getir.
+builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

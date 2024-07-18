@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace FreeCourse.Services.Catalog.Services
 {
-    public class CourseService
+    public class CourseService : ICourseService
     {
         private readonly IMongoCollection<Course> _courseCollection;
         private readonly IMongoCollection<Category> _categoryCollection;
@@ -34,15 +34,12 @@ namespace FreeCourse.Services.Catalog.Services
                 {
                     course.Category = await _categoryCollection.Find<Category>(x => x.Id == course.CategoryId)
                         .FirstAsync();
-
-
                 }
             }
             else
             {
                 courses = new List<Course>();
             }
-
             return Response<List<CourseDto>>.Success(_mapper.Map<List<CourseDto>>(courses), 200);
 
         }
@@ -107,6 +104,19 @@ namespace FreeCourse.Services.Catalog.Services
             return Response<NoContent>.Success(204);
         }
         //kurs sil 
+        public async Task<Response<NoContent>> DeleteAsync(string id)
+        {
+            var result = await _courseCollection.DeleteOneAsync(x => x.Id == id);
+
+            if (result.DeletedCount > 0)
+            {
+                return Response<NoContent>.Success(204);
+            }
+            else
+            {
+                return Response<NoContent>.Fail("Course not found",404);
+            }
+        }
        
     }
 
