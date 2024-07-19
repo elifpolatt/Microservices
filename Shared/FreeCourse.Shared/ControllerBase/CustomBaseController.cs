@@ -17,6 +17,6 @@ namespace FreeCourse.Shared.ControllerBase
                 StatusCode = response.StatusCode
             };
         }
-        public IActionResult 
+       
     }
 }
