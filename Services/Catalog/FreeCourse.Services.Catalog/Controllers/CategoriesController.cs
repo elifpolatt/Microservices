@@ -1,4 +1,6 @@
-﻿using FreeCourse.Services.Catalog.Services;
+﻿using FreeCourse.Services.Catalog.Dtos;
+using FreeCourse.Services.Catalog.Models;
+using FreeCourse.Services.Catalog.Services;
 using FreeCourse.Shared.ControllerBase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,25 @@ namespace FreeCourse.Services.Catalog.Controllers
         public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
+
+        }
+
+        public async Task<IActionResult> GetAll()
+        {
+            var response = await _categoryService.GetAllAsync();
+            return CreateActionResultInstance(response);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var response = await _categoryService.GetByIdAsync(id);
+            return CreateActionResultInstance(response);
+        }
+
+        public async Task<IActionResult> Create(CategoryDto categoryDto)
+        {
+            var response = await _categoryService.CreateAsync(categoryDto);
+            return CreateActionResultInstance(response);
 
         }
     }

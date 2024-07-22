@@ -32,8 +32,10 @@ namespace FreeCourse.Services.Catalog.Services
 
         //await: Async metotları beklemek ıcın kullanlır.
         //veri tabanına kategori nesnesi ekleyebilmek ve bunun sonucunda basarılı olarak bır yanıt donmesı ıcın kullanılan metot
-        public async Task<Response<CategoryDto>> CreateAsync(Category category)
+        public async Task<Response<CategoryDto>> CreateAsync(CategoryDto categoryDto)
         {
+
+            var category = _mapper.Map<Category>(categoryDto);
             await _categoryCollection.InsertOneAsync(category);
 
             // Dönüş türünü Response<CategoryDto> olarak düzeltin
