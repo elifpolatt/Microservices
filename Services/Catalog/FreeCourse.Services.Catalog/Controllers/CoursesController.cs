@@ -27,6 +27,7 @@ namespace FreeCourse.Services.Catalog.Controllers
             return CreateActionResultInstance(response); //CustomerBase  controlleronden alıyorum
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var response = await _courseService.GetAllAsync();
@@ -34,7 +35,8 @@ namespace FreeCourse.Services.Catalog.Controllers
             return CreateActionResultInstance(response);
         }
         //user id 
-        [Route("/api/[controller)/GetAllByUserId{userId}")]
+        //[Route("/api/[controller]/GetAllByUserId{userId}")]
+        [HttpGet("GetAllByUserId/{userId}")]
         public async Task<IActionResult> GetAllByUserId(string userId)
         {
             var response = await _courseService.GetAllByUserIdAsync(userId);

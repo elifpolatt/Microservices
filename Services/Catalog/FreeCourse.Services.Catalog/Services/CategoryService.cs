@@ -16,6 +16,8 @@ namespace FreeCourse.Services.Catalog.Services
         //veri tabanı baglantısı
         public CategoryService( IMapper mapper, IDatabaseSettings databaseSettings)
         {
+           
+
             var client = new MongoClient(databaseSettings.ConnectionString);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
             _categoryCollection = database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
